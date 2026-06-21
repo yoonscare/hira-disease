@@ -6,173 +6,236 @@
   <title>HIRA 한방 질병 조회</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.0.0/dist/tabler-icons.min.css">
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: #f5f5f0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans KR', sans-serif;
+      background: #EEF4FB;
       min-height: 100vh;
       display: flex;
-      align-items: flex-start;
-      justify-content: center;
-      padding: 2rem 1rem;
+      flex-direction: column;
+      align-items: center;
     }
-    .container {
-      background: #fff;
-      border-radius: 16px;
-      padding: 2rem;
+    .top-bar {
       width: 100%;
-      max-width: 680px;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
-    }
-    .header { display: flex; align-items: center; gap: 10px; margin-bottom: 1.5rem; }
-    .header i { font-size: 24px; color: #888; }
-    .header h1 { font-size: 20px; font-weight: 500; color: #1a1a1a; }
-    .header p { font-size: 13px; color: #888; margin-top: 2px; }
-
-    .card {
-      background: #f8f8f6;
-      border-radius: 12px;
-      padding: 1rem 1.25rem;
-      margin-bottom: 1.25rem;
-      border: 0.5px solid #e0e0da;
-    }
-    label { font-size: 13px; color: #666; display: block; margin-bottom: 6px; }
-    input[type="password"], input[type="text"] {
-      width: 100%;
-      padding: 8px 12px;
-      font-size: 14px;
-      border: 0.5px solid #d0d0ca;
-      border-radius: 8px;
-      background: #fff;
-      outline: none;
-      transition: border-color 0.15s;
-    }
-    input:focus { border-color: #666; }
-    .hint { font-size: 12px; color: #aaa; margin-top: 6px; }
-
-    .search-row { display: flex; gap: 8px; margin-bottom: 1.5rem; }
-    .search-row > div:first-child { flex: 1; }
-    .search-row label { font-size: 13px; color: #666; display: block; margin-bottom: 6px; }
-    button {
-      height: 38px;
-      padding: 0 1.25rem;
-      font-size: 14px;
-      border: 0.5px solid #ccc;
-      border-radius: 8px;
-      background: #fff;
-      cursor: pointer;
-      white-space: nowrap;
-      transition: background 0.15s;
-      margin-top: 25px;
-    }
-    button:hover { background: #f0f0ec; }
-    button:active { transform: scale(0.98); }
-
-    .result-header {
+      background: #1565C0;
+      padding: 0 2rem;
+      height: 56px;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      margin-bottom: 10px;
+      gap: 10px;
     }
-    .result-header span { font-size: 13px; color: #888; }
-    .badge {
-      font-size: 12px;
-      background: #e8f0fb;
-      color: #1a5cb0;
-      padding: 3px 10px;
-      border-radius: 8px;
-    }
-    .table-wrap {
-      border: 0.5px solid #e0e0da;
+    .top-bar i { font-size: 22px; color: #fff; }
+    .top-bar .title { font-size: 16px; font-weight: 500; color: #fff; }
+    .top-bar .sub { font-size: 12px; color: rgba(255,255,255,0.7); margin-left: auto; }
+    .main { width: 100%; max-width: 720px; padding: 1.5rem 1rem 4rem; }
+    .card {
+      background: #fff;
       border-radius: 12px;
-      overflow: hidden;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1.25rem;
+      border: 1px solid #DBEAFE;
     }
-    table { width: 100%; border-collapse: collapse; table-layout: fixed; }
-    thead tr { background: #f8f8f6; }
-    th {
-      padding: 10px 12px;
-      text-align: left;
+    .section-label {
       font-size: 12px;
       font-weight: 500;
-      color: #888;
-    }
-    td {
-      padding: 10px 12px;
-      font-size: 13px;
-      color: #1a1a1a;
-      border-bottom: 0.5px solid #eee;
-    }
-    tr:last-child td { border-bottom: none; }
-    .code-cell { font-weight: 500; white-space: nowrap; width: 90px; }
-    .eng-cell { color: #888; }
-
-    .msg {
-      padding: 1rem;
-      border-radius: 10px;
-      font-size: 14px;
+      color: #1565C0;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 10px;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
     }
-    .msg-danger { background: #fef0f0; color: #c0392b; }
-    .msg-warning { background: #fffbec; color: #b07d10; }
-    .msg-empty {
-      padding: 2rem;
-      text-align: center;
-      color: #aaa;
+    .section-label i { font-size: 15px; }
+    input[type="password"], input[type="text"] {
+      width: 100%;
+      padding: 10px 14px;
       font-size: 14px;
-      border: 0.5px solid #eee;
-      border-radius: 12px;
+      border: 1.5px solid #BFDBFE;
+      border-radius: 8px;
+      background: #F8FBFF;
+      outline: none;
+      color: #1a1a1a;
+      transition: border-color 0.15s, box-shadow 0.15s;
     }
-    .msg-empty i { font-size: 28px; display: block; margin-bottom: 8px; }
-    .msg-empty small { font-size: 12px; display: block; margin-top: 4px; }
+    input:focus { border-color: #1565C0; box-shadow: 0 0 0 3px rgba(21,101,192,0.12); background: #fff; }
+    .hint { font-size: 12px; color: #93A8C9; margin-top: 7px; display: flex; align-items: center; gap: 4px; }
+    .search-row { display: flex; gap: 10px; align-items: flex-end; }
+    .search-row > div { flex: 1; }
+    .search-row label { font-size: 13px; color: #555; display: block; margin-bottom: 6px; }
 
-    footer {
-      margin-top: 2rem;
-      text-align: center;
-      font-size: 12px;
-      color: #bbb;
+    /* 예시 키워드 */
+    .examples {
+      margin-top: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      align-items: center;
     }
+    .examples-label { font-size: 12px; color: #93A8C9; }
+    .ex-chip {
+      font-size: 12px;
+      padding: 4px 10px;
+      border-radius: 20px;
+      border: 1px solid #BFDBFE;
+      background: #F0F7FF;
+      color: #1565C0;
+      cursor: pointer;
+      transition: background 0.12s;
+    }
+    .ex-chip:hover { background: #DBEAFE; }
+
+    /* 탭 */
+    .tabs {
+      display: flex;
+      gap: 0;
+      border-bottom: 2px solid #DBEAFE;
+      margin-bottom: 1rem;
+    }
+    .tab {
+      padding: 8px 16px;
+      font-size: 13px;
+      color: #93A8C9;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -2px;
+      transition: color 0.15s;
+    }
+    .tab.active { color: #1565C0; font-weight: 500; border-bottom-color: #1565C0; }
+    .tab:hover { color: #1565C0; }
+
+    button.btn-primary {
+      height: 42px;
+      padding: 0 1.5rem;
+      font-size: 14px;
+      font-weight: 500;
+      border: none;
+      border-radius: 8px;
+      background: #1565C0;
+      color: #fff;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: background 0.15s;
+      white-space: nowrap;
+    }
+    button.btn-primary:hover { background: #1251A3; }
+    button.btn-primary:active { transform: scale(0.98); }
+
+    .result-meta { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+    .result-meta .label { font-size: 13px; color: #555; }
+    .badge { font-size: 12px; font-weight: 500; background: #DBEAFE; color: #1565C0; padding: 3px 12px; border-radius: 20px; }
+
+    .table-wrap { border: 1px solid #DBEAFE; border-radius: 10px; overflow: hidden; }
+    table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+    thead tr { background: #1565C0; }
+    th { padding: 11px 14px; text-align: left; font-size: 12px; font-weight: 500; color: rgba(255,255,255,0.9); }
+    td { padding: 11px 14px; font-size: 13px; color: #1a1a1a; border-bottom: 1px solid #EEF4FB; vertical-align: middle; }
+    tr:last-child td { border-bottom: none; }
+    tbody tr:hover { background: #F0F7FF; }
+    .code-chip { display: inline-block; background: #DBEAFE; color: #1565C0; font-size: 12px; font-weight: 500; padding: 2px 8px; border-radius: 6px; }
+    .eng { color: #6B7EA0; font-size: 12px; }
+
+    /* 통계 바 */
+    .stat-row { margin-bottom: 10px; }
+    .stat-label { display: flex; justify-content: space-between; font-size: 12px; color: #555; margin-bottom: 4px; }
+    .stat-bar-bg { height: 10px; background: #EEF4FB; border-radius: 10px; overflow: hidden; }
+    .stat-bar { height: 10px; background: #1565C0; border-radius: 10px; transition: width 0.4s; }
+    .stat-bar.female { background: #E91E8C; }
+
+    .msg { padding: 1rem 1.25rem; border-radius: 10px; font-size: 14px; display: flex; align-items: center; gap: 10px; }
+    .msg i { font-size: 18px; flex-shrink: 0; }
+    .msg-danger { background: #FEF0F0; color: #C0392B; border: 1px solid #FECACA; }
+    .msg-warning { background: #FFFBEC; color: #92610A; border: 1px solid #FDE68A; }
+    .msg-loading { background: #F0F7FF; color: #1565C0; border: 1px solid #BFDBFE; }
+    .msg-empty { padding: 2.5rem; text-align: center; color: #93A8C9; font-size: 14px; border: 1px solid #DBEAFE; border-radius: 10px; background: #fff; }
+    .msg-empty i { font-size: 32px; display: block; margin-bottom: 10px; color: #BFDBFE; }
+    .msg-empty small { display: block; margin-top: 6px; font-size: 12px; }
+
+    .info-box { background: #F0F7FF; border: 1px solid #BFDBFE; border-radius: 10px; padding: 1rem 1.25rem; margin-bottom: 1.25rem; }
+    .info-box .info-title { font-size: 13px; font-weight: 500; color: #1565C0; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+    .info-box ol { padding-left: 1.2rem; font-size: 13px; color: #374151; line-height: 1.9; }
+
+    footer { margin-top: 2rem; text-align: center; font-size: 12px; color: #93A8C9; line-height: 1.8; }
+
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    .year-select { padding: 6px 10px; font-size: 13px; border: 1px solid #BFDBFE; border-radius: 8px; background: #F8FBFF; color: #1a1a1a; outline: none; margin-bottom: 1rem; }
   </style>
 </head>
 <body>
-<div class="container">
 
-  <div class="header">
-    <i class="ti ti-stethoscope"></i>
-    <div>
-      <h1>HIRA 한방 질병 조회</h1>
-      <p>건강보험심사평가원 질병정보서비스</p>
-    </div>
+<div class="top-bar">
+  <i class="ti ti-medical-cross"></i>
+  <span class="title">HIRA 한방 질병 조회</span>
+  <span class="sub">건강보험심사평가원 질병정보서비스</span>
+</div>
+
+<div class="main">
+
+  <div class="info-box">
+    <div class="info-title"><i class="ti ti-info-circle"></i>처음 사용하시나요?</div>
+    <ol>
+      <li>www.data.go.kr 접속 → 회원가입</li>
+      <li>"건강보험심사평가원" 검색 → 질병정보서비스 신청 (자동승인)</li>
+      <li>마이페이지 → 개발계정 → 일반 인증키 복사</li>
+      <li>아래에 인증키 입력 후 질병명 검색</li>
+    </ol>
   </div>
 
   <div class="card">
-    <label><i class="ti ti-key" style="font-size:14px; vertical-align:-2px; margin-right:4px;"></i>공공데이터포털 인증키</label>
-    <input type="password" id="apiKey" placeholder="발급받은 일반 인증키를 입력하세요" />
-    <p class="hint">www.data.go.kr → 마이페이지 → 개발계정 → 일반 인증키</p>
+    <div class="section-label"><i class="ti ti-key"></i>인증키 입력</div>
+    <input type="password" id="apiKey" placeholder="공공데이터포털 일반 인증키를 입력하세요" />
+    <p class="hint"><i class="ti ti-lock" style="font-size:13px;"></i>인증키는 브라우저에만 저장되며 외부로 전송되지 않습니다.</p>
   </div>
 
-  <div class="search-row">
-    <div>
-      <label><i class="ti ti-search" style="font-size:14px; vertical-align:-2px; margin-right:4px;"></i>질병명 검색</label>
-      <input type="text" id="searchText" placeholder="예: 중풍, 소화불량, 두통" />
+  <div class="card">
+    <div class="section-label"><i class="ti ti-search"></i>질병명 검색</div>
+    <div class="search-row">
+      <div>
+        <input type="text" id="searchText" placeholder="질병명을 입력하세요" />
+      </div>
+      <button class="btn-primary" onclick="doSearch()">
+        <i class="ti ti-search"></i>조회
+      </button>
     </div>
-    <button onclick="search()">
-      <i class="ti ti-search" style="font-size:14px; margin-right:4px;"></i>조회
-    </button>
+    <div class="examples">
+      <span class="examples-label">검색 예시:</span>
+      <span class="ex-chip" onclick="setKeyword('소화불량')">소화불량</span>
+      <span class="ex-chip" onclick="setKeyword('두통')">두통</span>
+      <span class="ex-chip" onclick="setKeyword('요통')">요통</span>
+      <span class="ex-chip" onclick="setKeyword('관절')">관절</span>
+      <span class="ex-chip" onclick="setKeyword('불면')">불면</span>
+      <span class="ex-chip" onclick="setKeyword('뇌졸중')">뇌졸중(중풍)</span>
+      <span class="ex-chip" onclick="setKeyword('고혈압')">고혈압</span>
+      <span class="ex-chip" onclick="setKeyword('당뇨')">당뇨</span>
+      <span class="ex-chip" onclick="setKeyword('디스크')">디스크</span>
+    </div>
   </div>
 
   <div id="resultArea"></div>
 
-  <footer>건강보험심사평가원 질병정보서비스 | 한방(medTp=2) 기준 조회</footer>
+  <footer>
+    건강보험심사평가원 질병정보서비스 | 한방(medTp=2) 기준<br>
+    공공데이터포털 OpenAPI 활용
+  </footer>
 </div>
 
 <script>
 document.getElementById('searchText').addEventListener('keydown', function(e) {
-  if (e.key === 'Enter') search();
+  if (e.key === 'Enter') doSearch();
 });
 
-async function search() {
+function setKeyword(kw) {
+  document.getElementById('searchText').value = kw;
+  doSearch();
+}
+
+let lastResults = [];
+
+async function doSearch() {
   const apiKey = document.getElementById('apiKey').value.trim();
   const searchText = document.getElementById('searchText').value.trim();
   const resultArea = document.getElementById('resultArea');
@@ -186,7 +249,7 @@ async function search() {
     return;
   }
 
-  resultArea.innerHTML = '<div class="msg" style="color:#888;"><i class="ti ti-loader"></i>조회 중...</div>';
+  resultArea.innerHTML = '<div class="msg msg-loading"><i class="ti ti-loader"></i>HIRA에서 데이터를 가져오는 중...</div>';
 
   const url = `https://apis.data.go.kr/B551182/diseaseInfoService1/getDissNameCodeList1?sickType=1&medTp=2&diseaseType=SICK_NM&searchText=${encodeURIComponent(searchText)}&numOfRows=20&pageNo=1&ServiceKey=${encodeURIComponent(apiKey)}`;
 
@@ -199,7 +262,7 @@ async function search() {
     const resultCode = xml.querySelector('resultCode')?.textContent;
     if (resultCode !== '00') {
       const msg = xml.querySelector('resultMsg')?.textContent || '알 수 없는 오류';
-      resultArea.innerHTML = `<div class="msg msg-danger"><i class="ti ti-x"></i>오류: ${msg}</div>`;
+      resultArea.innerHTML = `<div class="msg msg-danger"><i class="ti ti-x"></i>API 오류: ${msg}</div>`;
       return;
     }
 
@@ -207,41 +270,159 @@ async function search() {
     const totalCount = xml.querySelector('totalCount')?.textContent || '0';
 
     if (items.length === 0) {
-      resultArea.innerHTML = `<div class="msg-empty"><i class="ti ti-database-off"></i>검색 결과가 없습니다.<small>한방 상병명은 다른 키워드로 검색해보세요.</small></div>`;
+      resultArea.innerHTML = `<div class="msg-empty"><i class="ti ti-database-off"></i>검색 결과가 없습니다.<small>위 예시 키워드로 검색해보세요.</small></div>`;
       return;
     }
 
-    let rows = '';
+    lastResults = [];
     items.forEach(item => {
-      const code = item.querySelector('sickCd')?.textContent || '-';
-      const nm = item.querySelector('sickNm')?.textContent || '-';
-      const engNm = item.querySelector('sickEngNm')?.textContent || '-';
-      rows += `<tr>
-        <td class="code-cell">${code}</td>
-        <td>${nm}</td>
-        <td class="eng-cell">${engNm}</td>
-      </tr>`;
+      lastResults.push({
+        code: item.querySelector('sickCd')?.textContent || '-',
+        nm: item.querySelector('sickNm')?.textContent || '-',
+        engNm: item.querySelector('sickEngNm')?.textContent || '-',
+      });
     });
 
-    resultArea.innerHTML = `
-      <div class="result-header">
-        <span>검색 결과</span>
-        <span class="badge">총 ${totalCount}건</span>
-      </div>
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th style="width:90px;">상병코드</th>
-              <th>한글 상병명</th>
-              <th>영문 상병명</th>
-            </tr>
-          </thead>
-          <tbody>${rows}</tbody>
-        </table>
-      </div>`;
+    renderResults(totalCount);
   } catch (e) {
     resultArea.innerHTML = `<div class="msg msg-danger"><i class="ti ti-wifi-off"></i>네트워크 오류. 인증키를 확인해주세요.</div>`;
+  }
+}
+
+function renderResults(totalCount) {
+  const rows = lastResults.map(r => `
+    <tr>
+      <td><span class="code-chip">${r.code}</span></td>
+      <td>${r.nm}</td>
+      <td class="eng">${r.engNm}</td>
+      <td style="width:80px;">
+        <button class="btn-primary" style="height:30px; font-size:12px; padding:0 10px;" onclick="loadStats('${r.code}', '${r.nm}')">
+          <i class="ti ti-chart-bar"></i>통계
+        </button>
+      </td>
+    </tr>`).join('');
+
+  document.getElementById('resultArea').innerHTML = `
+    <div class="card" style="padding:1.25rem;">
+      <div class="tabs">
+        <div class="tab active" onclick="switchTab('code')"><i class="ti ti-list" style="font-size:14px; margin-right:4px;"></i>상병코드</div>
+        <div class="tab" onclick="switchTab('stat')" id="statTab"><i class="ti ti-chart-bar" style="font-size:14px; margin-right:4px;"></i>성별/연령 통계</div>
+      </div>
+
+      <div class="tab-content active" id="tabCode">
+        <div class="result-meta">
+          <span class="label">조회 결과</span>
+          <span class="badge">총 ${totalCount}건</span>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr>
+              <th style="width:100px;">상병코드</th>
+              <th>한글 상병명</th>
+              <th>영문 상병명</th>
+              <th style="width:80px;">통계</th>
+            </tr></thead>
+            <tbody>${rows}</tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="tab-content" id="tabStat">
+        <div id="statContent"><p style="font-size:13px; color:#93A8C9;">상병코드 목록에서 <strong>통계</strong> 버튼을 눌러주세요.</p></div>
+      </div>
+    </div>`;
+}
+
+function switchTab(tab) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  if (tab === 'code') {
+    document.querySelectorAll('.tab')[0].classList.add('active');
+    document.getElementById('tabCode').classList.add('active');
+  } else {
+    document.querySelectorAll('.tab')[1].classList.add('active');
+    document.getElementById('tabStat').classList.add('active');
+  }
+}
+
+async function loadStats(code, nm) {
+  switchTab('stat');
+  const apiKey = document.getElementById('apiKey').value.trim();
+  const statContent = document.getElementById('statContent');
+  statContent.innerHTML = '<div class="msg msg-loading"><i class="ti ti-loader"></i>통계 데이터 불러오는 중...</div>';
+
+  const year = 2022;
+  const url = `https://apis.data.go.kr/B551182/diseaseInfoService1/getDissByGenderAgeStats1?year=${year}&sickCd=${code}&sickType=1&medTp=2&numOfRows=50&pageNo=1&ServiceKey=${encodeURIComponent(apiKey)}`;
+
+  try {
+    const res = await fetch(url);
+    const text = await res.text();
+    const parser = new DOMParser();
+    const xml = parser.parseFromString(text, 'text/xml');
+
+    const resultCode = xml.querySelector('resultCode')?.textContent;
+    if (resultCode !== '00') {
+      statContent.innerHTML = `<div class="msg msg-danger"><i class="ti ti-x"></i>통계 오류</div>`;
+      return;
+    }
+
+    const items = xml.querySelectorAll('item');
+    if (items.length === 0) {
+      statContent.innerHTML = `<div class="msg-empty"><i class="ti ti-chart-off"></i>통계 데이터가 없습니다.<small>${year}년 한방 데이터 없음</small></div>`;
+      return;
+    }
+
+    const ageMap = {};
+    let totalM = 0, totalF = 0;
+    items.forEach(item => {
+      const sex = item.querySelector('sex')?.textContent;
+      const age = item.querySelector('age')?.textContent || '-';
+      const cnt = parseInt(item.querySelector('ptntCnt')?.textContent || '0');
+      if (!ageMap[age]) ageMap[age] = { m: 0, f: 0 };
+      if (sex === '남') { ageMap[age].m += cnt; totalM += cnt; }
+      else { ageMap[age].f += cnt; totalF += cnt; }
+    });
+
+    const total = totalM + totalF;
+    const mPct = total > 0 ? Math.round(totalM / total * 100) : 0;
+    const fPct = 100 - mPct;
+
+    let ageRows = '';
+    const maxVal = Math.max(...Object.values(ageMap).map(v => v.m + v.f));
+    Object.entries(ageMap).sort().forEach(([age, v]) => {
+      const sum = v.m + v.f;
+      const pct = maxVal > 0 ? Math.round(sum / maxVal * 100) : 0;
+      ageRows += `
+        <div class="stat-row">
+          <div class="stat-label"><span>${age}</span><span>${sum.toLocaleString()}명</span></div>
+          <div class="stat-bar-bg"><div class="stat-bar" style="width:${pct}%"></div></div>
+        </div>`;
+    });
+
+    statContent.innerHTML = `
+      <p style="font-size:14px; font-weight:500; color:#1a1a1a; margin-bottom:1rem;">${nm} (${code}) · ${year}년 한방 환자 통계</p>
+      <div style="display:flex; gap:12px; margin-bottom:1.25rem;">
+        <div style="flex:1; background:#EEF4FB; border-radius:10px; padding:1rem; text-align:center;">
+          <div style="font-size:12px; color:#93A8C9; margin-bottom:4px;">남성</div>
+          <div style="font-size:22px; font-weight:500; color:#1565C0;">${mPct}%</div>
+          <div style="font-size:12px; color:#555;">${totalM.toLocaleString()}명</div>
+        </div>
+        <div style="flex:1; background:#FEF0F7; border-radius:10px; padding:1rem; text-align:center;">
+          <div style="font-size:12px; color:#93A8C9; margin-bottom:4px;">여성</div>
+          <div style="font-size:22px; font-weight:500; color:#E91E8C;">${fPct}%</div>
+          <div style="font-size:12px; color:#555;">${totalF.toLocaleString()}명</div>
+        </div>
+        <div style="flex:1; background:#F0FFF4; border-radius:10px; padding:1rem; text-align:center;">
+          <div style="font-size:12px; color:#93A8C9; margin-bottom:4px;">전체</div>
+          <div style="font-size:22px; font-weight:500; color:#1B7A3E;">${total.toLocaleString()}</div>
+          <div style="font-size:12px; color:#555;">명</div>
+        </div>
+      </div>
+      <p style="font-size:12px; font-weight:500; color:#555; margin-bottom:10px;">연령별 환자 수</p>
+      ${ageRows}
+      <p style="font-size:11px; color:#bbb; margin-top:12px;">* ${year}년 기준 건강보험 청구 데이터</p>`;
+  } catch(e) {
+    statContent.innerHTML = `<div class="msg msg-danger"><i class="ti ti-wifi-off"></i>통계 로딩 실패</div>`;
   }
 }
 </script>
