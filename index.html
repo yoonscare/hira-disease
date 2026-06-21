@@ -7,126 +7,37 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.0.0/dist/tabler-icons.min.css">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans KR', sans-serif;
-      background: #EEF4FB;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .top-bar {
-      width: 100%;
-      background: #1565C0;
-      padding: 0 2rem;
-      height: 56px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans KR', sans-serif; background: #EEF4FB; min-height: 100vh; display: flex; flex-direction: column; align-items: center; }
+    .top-bar { width: 100%; background: #1565C0; padding: 0 2rem; height: 56px; display: flex; align-items: center; gap: 10px; }
     .top-bar i { font-size: 22px; color: #fff; }
     .top-bar .title { font-size: 16px; font-weight: 500; color: #fff; }
     .top-bar .sub { font-size: 12px; color: rgba(255,255,255,0.7); margin-left: auto; }
-    .main { width: 100%; max-width: 720px; padding: 1.5rem 1rem 4rem; }
-    .card {
-      background: #fff;
-      border-radius: 12px;
-      padding: 1.25rem 1.5rem;
-      margin-bottom: 1.25rem;
-      border: 1px solid #DBEAFE;
-    }
-    .section-label {
-      font-size: 12px;
-      font-weight: 500;
-      color: #1565C0;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 10px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .section-label i { font-size: 15px; }
-    input[type="password"], input[type="text"] {
-      width: 100%;
-      padding: 10px 14px;
-      font-size: 14px;
-      border: 1.5px solid #BFDBFE;
-      border-radius: 8px;
-      background: #F8FBFF;
-      outline: none;
-      color: #1a1a1a;
-      transition: border-color 0.15s, box-shadow 0.15s;
-    }
+    .main { width: 100%; max-width: 760px; padding: 1.5rem 1rem 4rem; }
+    .card { background: #fff; border-radius: 12px; padding: 1.25rem 1.5rem; margin-bottom: 1.25rem; border: 1px solid #DBEAFE; }
+    .section-label { font-size: 12px; font-weight: 500; color: #1565C0; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+    input[type="password"], input[type="text"] { width: 100%; padding: 10px 14px; font-size: 14px; border: 1.5px solid #BFDBFE; border-radius: 8px; background: #F8FBFF; outline: none; color: #1a1a1a; transition: border-color 0.15s, box-shadow 0.15s; }
     input:focus { border-color: #1565C0; box-shadow: 0 0 0 3px rgba(21,101,192,0.12); background: #fff; }
     .hint { font-size: 12px; color: #93A8C9; margin-top: 7px; display: flex; align-items: center; gap: 4px; }
     .search-row { display: flex; gap: 10px; align-items: flex-end; }
     .search-row > div { flex: 1; }
-    .search-row label { font-size: 13px; color: #555; display: block; margin-bottom: 6px; }
-
-    /* 예시 키워드 */
-    .examples {
-      margin-top: 10px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      align-items: center;
-    }
+    .examples { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
     .examples-label { font-size: 12px; color: #93A8C9; }
-    .ex-chip {
-      font-size: 12px;
-      padding: 4px 10px;
-      border-radius: 20px;
-      border: 1px solid #BFDBFE;
-      background: #F0F7FF;
-      color: #1565C0;
-      cursor: pointer;
-      transition: background 0.12s;
-    }
+    .ex-chip { font-size: 12px; padding: 4px 10px; border-radius: 20px; border: 1px solid #BFDBFE; background: #F0F7FF; color: #1565C0; cursor: pointer; transition: background 0.12s; }
     .ex-chip:hover { background: #DBEAFE; }
-
-    /* 탭 */
-    .tabs {
-      display: flex;
-      gap: 0;
-      border-bottom: 2px solid #DBEAFE;
-      margin-bottom: 1rem;
-    }
-    .tab {
-      padding: 8px 16px;
-      font-size: 13px;
-      color: #93A8C9;
-      cursor: pointer;
-      border-bottom: 2px solid transparent;
-      margin-bottom: -2px;
-      transition: color 0.15s;
-    }
+    .tabs { display: flex; gap: 0; border-bottom: 2px solid #DBEAFE; margin-bottom: 1rem; overflow-x: auto; }
+    .tab { padding: 8px 14px; font-size: 13px; color: #93A8C9; cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -2px; transition: color 0.15s; white-space: nowrap; display: flex; align-items: center; gap: 5px; }
     .tab.active { color: #1565C0; font-weight: 500; border-bottom-color: #1565C0; }
     .tab:hover { color: #1565C0; }
-
-    button.btn-primary {
-      height: 42px;
-      padding: 0 1.5rem;
-      font-size: 14px;
-      font-weight: 500;
-      border: none;
-      border-radius: 8px;
-      background: #1565C0;
-      color: #fff;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      transition: background 0.15s;
-      white-space: nowrap;
-    }
-    button.btn-primary:hover { background: #1251A3; }
-    button.btn-primary:active { transform: scale(0.98); }
-
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+    .btn-primary { height: 42px; padding: 0 1.5rem; font-size: 14px; font-weight: 500; border: none; border-radius: 8px; background: #1565C0; color: #fff; cursor: pointer; display: flex; align-items: center; gap: 6px; transition: background 0.15s; white-space: nowrap; }
+    .btn-primary:hover { background: #1251A3; }
+    .btn-primary:active { transform: scale(0.98); }
+    .btn-sm { height: 30px; font-size: 12px; padding: 0 10px; border: none; border-radius: 6px; background: #1565C0; color: #fff; cursor: pointer; display: inline-flex; align-items: center; gap: 4px; }
+    .btn-sm:hover { background: #1251A3; }
     .result-meta { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
     .result-meta .label { font-size: 13px; color: #555; }
     .badge { font-size: 12px; font-weight: 500; background: #DBEAFE; color: #1565C0; padding: 3px 12px; border-radius: 20px; }
-
     .table-wrap { border: 1px solid #DBEAFE; border-radius: 10px; overflow: hidden; }
     table { width: 100%; border-collapse: collapse; table-layout: fixed; }
     thead tr { background: #1565C0; }
@@ -136,14 +47,15 @@
     tbody tr:hover { background: #F0F7FF; }
     .code-chip { display: inline-block; background: #DBEAFE; color: #1565C0; font-size: 12px; font-weight: 500; padding: 2px 8px; border-radius: 6px; }
     .eng { color: #6B7EA0; font-size: 12px; }
-
-    /* 통계 바 */
+    .stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 1.25rem; }
+    .stat-card { border-radius: 10px; padding: 1rem; text-align: center; }
+    .stat-card .s-label { font-size: 12px; color: #93A8C9; margin-bottom: 4px; }
+    .stat-card .s-val { font-size: 22px; font-weight: 500; }
+    .stat-card .s-sub { font-size: 12px; color: #555; margin-top: 2px; }
     .stat-row { margin-bottom: 10px; }
     .stat-label { display: flex; justify-content: space-between; font-size: 12px; color: #555; margin-bottom: 4px; }
     .stat-bar-bg { height: 10px; background: #EEF4FB; border-radius: 10px; overflow: hidden; }
-    .stat-bar { height: 10px; background: #1565C0; border-radius: 10px; transition: width 0.4s; }
-    .stat-bar.female { background: #E91E8C; }
-
+    .stat-bar { height: 10px; border-radius: 10px; transition: width 0.5s; }
     .msg { padding: 1rem 1.25rem; border-radius: 10px; font-size: 14px; display: flex; align-items: center; gap: 10px; }
     .msg i { font-size: 18px; flex-shrink: 0; }
     .msg-danger { background: #FEF0F0; color: #C0392B; border: 1px solid #FECACA; }
@@ -152,17 +64,35 @@
     .msg-empty { padding: 2.5rem; text-align: center; color: #93A8C9; font-size: 14px; border: 1px solid #DBEAFE; border-radius: 10px; background: #fff; }
     .msg-empty i { font-size: 32px; display: block; margin-bottom: 10px; color: #BFDBFE; }
     .msg-empty small { display: block; margin-top: 6px; font-size: 12px; }
-
     .info-box { background: #F0F7FF; border: 1px solid #BFDBFE; border-radius: 10px; padding: 1rem 1.25rem; margin-bottom: 1.25rem; }
     .info-box .info-title { font-size: 13px; font-weight: 500; color: #1565C0; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
     .info-box ol { padding-left: 1.2rem; font-size: 13px; color: #374151; line-height: 1.9; }
-
+    .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 1rem; }
+    .compare-card { border-radius: 10px; padding: 1rem; border: 1px solid; }
+    .compare-card.oriental { background: #F0F7FF; border-color: #BFDBFE; }
+    .compare-card.western { background: #FFF7F0; border-color: #FED7AA; }
+    .compare-card .c-label { font-size: 12px; font-weight: 500; margin-bottom: 6px; display: flex; align-items: center; gap: 5px; }
+    .compare-card.oriental .c-label { color: #1565C0; }
+    .compare-card.western .c-label { color: #C2410C; }
+    .compare-card .c-val { font-size: 24px; font-weight: 500; }
+    .compare-card.oriental .c-val { color: #1565C0; }
+    .compare-card.western .c-val { color: #C2410C; }
+    .compare-card .c-sub { font-size: 12px; color: #888; margin-top: 2px; }
+    .share-pct { margin-top: 10px; }
+    .share-bar-bg { height: 14px; background: #FED7AA; border-radius: 10px; overflow: hidden; margin-bottom: 4px; }
+    .share-bar { height: 14px; background: #1565C0; border-radius: 10px; transition: width 0.5s; }
+    .share-labels { display: flex; justify-content: space-between; font-size: 11px; }
+    .trend-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+    .trend-year { font-size: 12px; color: #555; width: 40px; flex-shrink: 0; }
+    .trend-bar-bg { flex: 1; height: 24px; background: #EEF4FB; border-radius: 6px; overflow: hidden; }
+    .trend-bar { height: 24px; background: #1565C0; border-radius: 6px; transition: width 0.5s; display: flex; align-items: center; padding-left: 8px; }
+    .trend-bar span { font-size: 11px; color: #fff; white-space: nowrap; }
+    .trend-badge { font-size: 12px; width: 70px; text-align: right; flex-shrink: 0; }
+    .up { color: #16A34A; }
+    .down { color: #DC2626; }
+    .region-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+    .region-name { font-size: 12px; color: #555; width: 60px; flex-shrink: 0; }
     footer { margin-top: 2rem; text-align: center; font-size: 12px; color: #93A8C9; line-height: 1.8; }
-
-    .tab-content { display: none; }
-    .tab-content.active { display: block; }
-
-    .year-select { padding: 6px 10px; font-size: 13px; border: 1px solid #BFDBFE; border-radius: 8px; background: #F8FBFF; color: #1a1a1a; outline: none; margin-bottom: 1rem; }
   </style>
 </head>
 <body>
@@ -174,7 +104,6 @@
 </div>
 
 <div class="main">
-
   <div class="info-box">
     <div class="info-title"><i class="ti ti-info-circle"></i>처음 사용하시나요?</div>
     <ol>
@@ -194,12 +123,8 @@
   <div class="card">
     <div class="section-label"><i class="ti ti-search"></i>질병명 검색</div>
     <div class="search-row">
-      <div>
-        <input type="text" id="searchText" placeholder="질병명을 입력하세요" />
-      </div>
-      <button class="btn-primary" onclick="doSearch()">
-        <i class="ti ti-search"></i>조회
-      </button>
+      <div><input type="text" id="searchText" placeholder="질병명을 입력하세요" /></div>
+      <button class="btn-primary" onclick="doSearch()"><i class="ti ti-search"></i>조회</button>
     </div>
     <div class="examples">
       <span class="examples-label">검색 예시:</span>
@@ -217,213 +142,207 @@
 
   <div id="resultArea"></div>
 
-  <footer>
-    건강보험심사평가원 질병정보서비스 | 한방(medTp=2) 기준<br>
-    공공데이터포털 OpenAPI 활용
-  </footer>
+  <footer>건강보험심사평가원 질병정보서비스 | 공공데이터포털 OpenAPI 활용<br>통계는 건강보험 청구 기준이며 실제 환자 수와 다를 수 있습니다.</footer>
 </div>
 
 <script>
-document.getElementById('searchText').addEventListener('keydown', function(e) {
-  if (e.key === 'Enter') doSearch();
-});
+document.getElementById('searchText').addEventListener('keydown', e => { if(e.key==='Enter') doSearch(); });
 
-function setKeyword(kw) {
-  document.getElementById('searchText').value = kw;
-  doSearch();
-}
+function setKeyword(kw) { document.getElementById('searchText').value = kw; doSearch(); }
 
 let lastResults = [];
+let currentCode = '';
+let currentNm = '';
+
+function getApiKey() { return document.getElementById('apiKey').value.trim(); }
+
+async function fetchXml(url) {
+  const res = await fetch(url);
+  const text = await res.text();
+  return new DOMParser().parseFromString(text, 'text/xml');
+}
 
 async function doSearch() {
-  const apiKey = document.getElementById('apiKey').value.trim();
+  const apiKey = getApiKey();
   const searchText = document.getElementById('searchText').value.trim();
   const resultArea = document.getElementById('resultArea');
-
-  if (!apiKey) {
-    resultArea.innerHTML = '<div class="msg msg-danger"><i class="ti ti-alert-circle"></i>인증키를 입력해주세요.</div>';
-    return;
-  }
-  if (!searchText) {
-    resultArea.innerHTML = '<div class="msg msg-warning"><i class="ti ti-alert-triangle"></i>검색어를 입력해주세요.</div>';
-    return;
-  }
-
+  if (!apiKey) { resultArea.innerHTML = '<div class="msg msg-danger"><i class="ti ti-alert-circle"></i>인증키를 입력해주세요.</div>'; return; }
+  if (!searchText) { resultArea.innerHTML = '<div class="msg msg-warning"><i class="ti ti-alert-triangle"></i>검색어를 입력해주세요.</div>'; return; }
   resultArea.innerHTML = '<div class="msg msg-loading"><i class="ti ti-loader"></i>HIRA에서 데이터를 가져오는 중...</div>';
-
-  const url = `https://apis.data.go.kr/B551182/diseaseInfoService1/getDissNameCodeList1?sickType=1&medTp=2&diseaseType=SICK_NM&searchText=${encodeURIComponent(searchText)}&numOfRows=20&pageNo=1&ServiceKey=${encodeURIComponent(apiKey)}`;
-
   try {
-    const res = await fetch(url);
-    const text = await res.text();
-    const parser = new DOMParser();
-    const xml = parser.parseFromString(text, 'text/xml');
-
+    const xml = await fetchXml(`https://apis.data.go.kr/B551182/diseaseInfoService1/getDissNameCodeList1?sickType=1&medTp=2&diseaseType=SICK_NM&searchText=${encodeURIComponent(searchText)}&numOfRows=20&pageNo=1&ServiceKey=${encodeURIComponent(apiKey)}`);
     const resultCode = xml.querySelector('resultCode')?.textContent;
-    if (resultCode !== '00') {
-      const msg = xml.querySelector('resultMsg')?.textContent || '알 수 없는 오류';
-      resultArea.innerHTML = `<div class="msg msg-danger"><i class="ti ti-x"></i>API 오류: ${msg}</div>`;
-      return;
-    }
-
+    if (resultCode !== '00') { resultArea.innerHTML = `<div class="msg msg-danger"><i class="ti ti-x"></i>API 오류: ${xml.querySelector('resultMsg')?.textContent}</div>`; return; }
     const items = xml.querySelectorAll('item');
     const totalCount = xml.querySelector('totalCount')?.textContent || '0';
-
-    if (items.length === 0) {
-      resultArea.innerHTML = `<div class="msg-empty"><i class="ti ti-database-off"></i>검색 결과가 없습니다.<small>위 예시 키워드로 검색해보세요.</small></div>`;
-      return;
-    }
-
+    if (items.length === 0) { resultArea.innerHTML = `<div class="msg-empty"><i class="ti ti-database-off"></i>검색 결과가 없습니다.<small>위 예시 키워드로 검색해보세요.</small></div>`; return; }
     lastResults = [];
-    items.forEach(item => {
-      lastResults.push({
-        code: item.querySelector('sickCd')?.textContent || '-',
-        nm: item.querySelector('sickNm')?.textContent || '-',
-        engNm: item.querySelector('sickEngNm')?.textContent || '-',
-      });
-    });
-
+    items.forEach(item => lastResults.push({ code: item.querySelector('sickCd')?.textContent||'-', nm: item.querySelector('sickNm')?.textContent||'-', engNm: item.querySelector('sickEngNm')?.textContent||'-' }));
     renderResults(totalCount);
-  } catch (e) {
-    resultArea.innerHTML = `<div class="msg msg-danger"><i class="ti ti-wifi-off"></i>네트워크 오류. 인증키를 확인해주세요.</div>`;
-  }
+  } catch(e) { resultArea.innerHTML = `<div class="msg msg-danger"><i class="ti ti-wifi-off"></i>네트워크 오류. 인증키를 확인해주세요.</div>`; }
 }
 
 function renderResults(totalCount) {
-  const rows = lastResults.map(r => `
-    <tr>
-      <td><span class="code-chip">${r.code}</span></td>
-      <td>${r.nm}</td>
-      <td class="eng">${r.engNm}</td>
-      <td style="width:80px;">
-        <button class="btn-primary" style="height:30px; font-size:12px; padding:0 10px;" onclick="loadStats('${r.code}', '${r.nm}')">
-          <i class="ti ti-chart-bar"></i>통계
-        </button>
-      </td>
-    </tr>`).join('');
+  const rows = lastResults.map(r => `<tr>
+    <td><span class="code-chip">${r.code}</span></td>
+    <td>${r.nm}</td>
+    <td class="eng">${r.engNm}</td>
+    <td style="width:220px;">
+      <div style="display:flex;gap:4px;flex-wrap:wrap;">
+        <button class="btn-sm" onclick="loadTab('stat','${r.code}','${r.nm}')"><i class="ti ti-chart-bar"></i>성별/연령</button>
+        <button class="btn-sm" style="background:#0F766E;" onclick="loadTab('compare','${r.code}','${r.nm}')"><i class="ti ti-scale"></i>한방vs양방</button>
+        <button class="btn-sm" style="background:#7C3AED;" onclick="loadTab('trend','${r.code}','${r.nm}')"><i class="ti ti-trending-up"></i>추이</button>
+        <button class="btn-sm" style="background:#B45309;" onclick="loadTab('region','${r.code}','${r.nm}')"><i class="ti ti-map-pin"></i>지역</button>
+      </div>
+    </td>
+  </tr>`).join('');
 
   document.getElementById('resultArea').innerHTML = `
     <div class="card" style="padding:1.25rem;">
       <div class="tabs">
-        <div class="tab active" onclick="switchTab('code')"><i class="ti ti-list" style="font-size:14px; margin-right:4px;"></i>상병코드</div>
-        <div class="tab" onclick="switchTab('stat')" id="statTab"><i class="ti ti-chart-bar" style="font-size:14px; margin-right:4px;"></i>성별/연령 통계</div>
+        <div class="tab active" onclick="switchTab('code')"><i class="ti ti-list"></i>상병코드</div>
+        <div class="tab" onclick="switchTab('stat')" id="tab-stat"><i class="ti ti-chart-bar"></i>성별/연령</div>
+        <div class="tab" onclick="switchTab('compare')" id="tab-compare"><i class="ti ti-scale"></i>한방 vs 양방</div>
+        <div class="tab" onclick="switchTab('trend')" id="tab-trend"><i class="ti ti-trending-up"></i>연도별 추이</div>
+        <div class="tab" onclick="switchTab('region')" id="tab-region"><i class="ti ti-map-pin"></i>지역별</div>
       </div>
-
       <div class="tab-content active" id="tabCode">
-        <div class="result-meta">
-          <span class="label">조회 결과</span>
-          <span class="badge">총 ${totalCount}건</span>
-        </div>
-        <div class="table-wrap">
-          <table>
-            <thead><tr>
-              <th style="width:100px;">상병코드</th>
-              <th>한글 상병명</th>
-              <th>영문 상병명</th>
-              <th style="width:80px;">통계</th>
-            </tr></thead>
-            <tbody>${rows}</tbody>
-          </table>
-        </div>
+        <div class="result-meta"><span class="label">조회 결과</span><span class="badge">총 ${totalCount}건</span></div>
+        <div class="table-wrap"><table>
+          <thead><tr><th style="width:90px;">상병코드</th><th>한글 상병명</th><th>영문 상병명</th><th style="width:220px;">분석</th></tr></thead>
+          <tbody>${rows}</tbody>
+        </table></div>
       </div>
-
-      <div class="tab-content" id="tabStat">
-        <div id="statContent"><p style="font-size:13px; color:#93A8C9;">상병코드 목록에서 <strong>통계</strong> 버튼을 눌러주세요.</p></div>
-      </div>
+      <div class="tab-content" id="tabStat"><div id="statContent"><p style="font-size:13px;color:#93A8C9;">상병코드 목록에서 버튼을 눌러주세요.</p></div></div>
+      <div class="tab-content" id="tabCompare"><div id="compareContent"><p style="font-size:13px;color:#93A8C9;">상병코드 목록에서 버튼을 눌러주세요.</p></div></div>
+      <div class="tab-content" id="tabTrend"><div id="trendContent"><p style="font-size:13px;color:#93A8C9;">상병코드 목록에서 버튼을 눌러주세요.</p></div></div>
+      <div class="tab-content" id="tabRegion"><div id="regionContent"><p style="font-size:13px;color:#93A8C9;">상병코드 목록에서 버튼을 눌러주세요.</p></div></div>
     </div>`;
 }
 
 function switchTab(tab) {
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-  if (tab === 'code') {
-    document.querySelectorAll('.tab')[0].classList.add('active');
-    document.getElementById('tabCode').classList.add('active');
-  } else {
-    document.querySelectorAll('.tab')[1].classList.add('active');
-    document.getElementById('tabStat').classList.add('active');
-  }
+  const idx = {code:0,stat:1,compare:2,trend:3,region:4}[tab];
+  document.querySelectorAll('.tab')[idx].classList.add('active');
+  document.querySelectorAll('.tab-content')[idx].classList.add('active');
 }
 
-async function loadStats(code, nm) {
-  switchTab('stat');
-  const apiKey = document.getElementById('apiKey').value.trim();
-  const statContent = document.getElementById('statContent');
-  statContent.innerHTML = '<div class="msg msg-loading"><i class="ti ti-loader"></i>통계 데이터 불러오는 중...</div>';
-
-  const year = 2022;
-  const url = `https://apis.data.go.kr/B551182/diseaseInfoService1/getDissByGenderAgeStats1?year=${year}&sickCd=${code}&sickType=1&medTp=2&numOfRows=50&pageNo=1&ServiceKey=${encodeURIComponent(apiKey)}`;
-
+async function loadTab(type, code, nm) {
+  currentCode = code; currentNm = nm;
+  switchTab(type);
+  const contentEl = document.getElementById(type+'Content');
+  contentEl.innerHTML = '<div class="msg msg-loading"><i class="ti ti-loader"></i>데이터 불러오는 중...</div>';
+  const apiKey = getApiKey();
   try {
-    const res = await fetch(url);
-    const text = await res.text();
-    const parser = new DOMParser();
-    const xml = parser.parseFromString(text, 'text/xml');
+    if (type === 'stat') await loadStat(code, nm, apiKey, contentEl);
+    else if (type === 'compare') await loadCompare(code, nm, apiKey, contentEl);
+    else if (type === 'trend') await loadTrend(code, nm, apiKey, contentEl);
+    else if (type === 'region') await loadRegion(code, nm, apiKey, contentEl);
+  } catch(e) { contentEl.innerHTML = '<div class="msg msg-danger"><i class="ti ti-wifi-off"></i>데이터 로딩 실패</div>'; }
+}
 
-    const resultCode = xml.querySelector('resultCode')?.textContent;
-    if (resultCode !== '00') {
-      statContent.innerHTML = `<div class="msg msg-danger"><i class="ti ti-x"></i>통계 오류</div>`;
-      return;
-    }
+async function loadStat(code, nm, apiKey, el) {
+  const xml = await fetchXml(`https://apis.data.go.kr/B551182/diseaseInfoService1/getDissByGenderAgeStats1?year=2022&sickCd=${code}&sickType=1&medTp=2&numOfRows=50&pageNo=1&ServiceKey=${encodeURIComponent(apiKey)}`);
+  const items = xml.querySelectorAll('item');
+  if (items.length === 0) { el.innerHTML = '<div class="msg-empty"><i class="ti ti-chart-off"></i>통계 데이터 없음<small>한방 청구 데이터가 없는 질환입니다.</small></div>'; return; }
+  const ageMap = {}; let totalM=0, totalF=0;
+  items.forEach(item => {
+    const sex = item.querySelector('sex')?.textContent;
+    const age = item.querySelector('age')?.textContent||'-';
+    const cnt = parseInt(item.querySelector('ptntCnt')?.textContent||'0');
+    if (!ageMap[age]) ageMap[age]={m:0,f:0};
+    if (sex==='남') { ageMap[age].m+=cnt; totalM+=cnt; } else { ageMap[age].f+=cnt; totalF+=cnt; }
+  });
+  const total=totalM+totalF;
+  const mPct=total>0?Math.round(totalM/total*100):0;
+  const maxVal=Math.max(...Object.values(ageMap).map(v=>v.m+v.f));
+  let ageRows='';
+  Object.entries(ageMap).sort().forEach(([age,v])=>{
+    const sum=v.m+v.f; const pct=maxVal>0?Math.round(sum/maxVal*100):0;
+    ageRows+=`<div class="stat-row"><div class="stat-label"><span>${age}</span><span>${sum.toLocaleString()}명</span></div><div class="stat-bar-bg"><div class="stat-bar" style="width:${pct}%;background:#1565C0;"></div></div></div>`;
+  });
+  el.innerHTML = `<p style="font-size:14px;font-weight:500;color:#1a1a1a;margin-bottom:1rem;">${nm} (${code}) · 2022년 한방 환자 통계</p>
+    <div class="stat-grid">
+      <div class="stat-card" style="background:#EEF4FB;"><div class="s-label">남성</div><div class="s-val" style="color:#1565C0;">${mPct}%</div><div class="s-sub">${totalM.toLocaleString()}명</div></div>
+      <div class="stat-card" style="background:#FEF0F7;"><div class="s-label">여성</div><div class="s-val" style="color:#E91E8C;">${100-mPct}%</div><div class="s-sub">${totalF.toLocaleString()}명</div></div>
+      <div class="stat-card" style="background:#F0FFF4;"><div class="s-label">전체</div><div class="s-val" style="color:#1B7A3E;">${total.toLocaleString()}</div><div class="s-sub">명</div></div>
+    </div>
+    <p style="font-size:12px;font-weight:500;color:#555;margin-bottom:10px;">연령별 환자 수</p>${ageRows}
+    <p style="font-size:11px;color:#bbb;margin-top:12px;">* 2022년 건강보험 청구 기준</p>`;
+}
 
-    const items = xml.querySelectorAll('item');
-    if (items.length === 0) {
-      statContent.innerHTML = `<div class="msg-empty"><i class="ti ti-chart-off"></i>통계 데이터가 없습니다.<small>${year}년 한방 데이터 없음</small></div>`;
-      return;
-    }
+async function loadCompare(code, nm, apiKey, el) {
+  const [xmlO, xmlW] = await Promise.all([
+    fetchXml(`https://apis.data.go.kr/B551182/diseaseInfoService1/getDissByGenderAgeStats1?year=2022&sickCd=${code}&sickType=1&medTp=2&numOfRows=50&pageNo=1&ServiceKey=${encodeURIComponent(apiKey)}`),
+    fetchXml(`https://apis.data.go.kr/B551182/diseaseInfoService1/getDissByGenderAgeStats1?year=2022&sickCd=${code}&sickType=1&medTp=1&numOfRows=50&pageNo=1&ServiceKey=${encodeURIComponent(apiKey)}`)
+  ]);
+  let totalO=0, totalW=0;
+  xmlO.querySelectorAll('item').forEach(item => totalO+=parseInt(item.querySelector('ptntCnt')?.textContent||'0'));
+  xmlW.querySelectorAll('item').forEach(item => totalW+=parseInt(item.querySelector('ptntCnt')?.textContent||'0'));
+  const totalAll=totalO+totalW;
+  if (totalAll===0) { el.innerHTML='<div class="msg-empty"><i class="ti ti-database-off"></i>데이터 없음</div>'; return; }
+  const oPct=Math.round(totalO/totalAll*100);
+  const insight = oPct < 10 ? `⚠️ 한방 점유율이 ${oPct}%로 낮습니다. 환자 유치 가능성이 있는 질환입니다.`
+    : oPct > 40 ? `✅ 한방 점유율이 ${oPct}%로 높습니다. 한방 치료 선호도가 높은 질환입니다.`
+    : `ℹ️ 한방 점유율 ${oPct}%. 양방과 경쟁하는 질환입니다.`;
+  el.innerHTML = `<p style="font-size:14px;font-weight:500;color:#1a1a1a;margin-bottom:1rem;">${nm} (${code}) · 2022년 한방 vs 양방 비교</p>
+    <div class="compare-grid">
+      <div class="compare-card oriental"><div class="c-label"><i class="ti ti-leaf"></i>한방</div><div class="c-val">${totalO.toLocaleString()}</div><div class="c-sub">명 · ${oPct}%</div></div>
+      <div class="compare-card western"><div class="c-label"><i class="ti ti-stethoscope"></i>양방</div><div class="c-val">${totalW.toLocaleString()}</div><div class="c-sub">명 · ${100-oPct}%</div></div>
+    </div>
+    <div class="share-pct">
+      <div style="font-size:12px;color:#555;margin-bottom:6px;">전체 점유율</div>
+      <div class="share-bar-bg"><div class="share-bar" style="width:${oPct}%;"></div></div>
+      <div class="share-labels"><span style="color:#1565C0;">한방 ${oPct}%</span><span style="color:#C2410C;">양방 ${100-oPct}%</span></div>
+    </div>
+    <div style="margin-top:1rem;padding:0.875rem;background:#F0FFF4;border-radius:8px;font-size:13px;color:#374151;border:1px solid #BBF7D0;">${insight}</div>
+    <p style="font-size:11px;color:#bbb;margin-top:12px;">* 2022년 건강보험 청구 기준. 전체 환자 ${totalAll.toLocaleString()}명</p>`;
+}
 
-    const ageMap = {};
-    let totalM = 0, totalF = 0;
-    items.forEach(item => {
-      const sex = item.querySelector('sex')?.textContent;
-      const age = item.querySelector('age')?.textContent || '-';
-      const cnt = parseInt(item.querySelector('ptntCnt')?.textContent || '0');
-      if (!ageMap[age]) ageMap[age] = { m: 0, f: 0 };
-      if (sex === '남') { ageMap[age].m += cnt; totalM += cnt; }
-      else { ageMap[age].f += cnt; totalF += cnt; }
-    });
+async function loadTrend(code, nm, apiKey, el) {
+  const years = [2019,2020,2021,2022];
+  const results = await Promise.all(years.map(y =>
+    fetchXml(`https://apis.data.go.kr/B551182/diseaseInfoService1/getDissByGenderAgeStats1?year=${y}&sickCd=${code}&sickType=1&medTp=2&numOfRows=50&pageNo=1&ServiceKey=${encodeURIComponent(apiKey)}`)
+  ));
+  const data = results.map((xml,i)=>{ let t=0; xml.querySelectorAll('item').forEach(item=>t+=parseInt(item.querySelector('ptntCnt')?.textContent||'0')); return {year:years[i],total:t}; });
+  const maxVal = Math.max(...data.map(d=>d.total));
+  if (maxVal===0) { el.innerHTML='<div class="msg-empty"><i class="ti ti-chart-off"></i>추이 데이터 없음</div>'; return; }
+  let rows='';
+  data.forEach((d,i)=>{
+    const pct=maxVal>0?Math.round(d.total/maxVal*100):0;
+    let badge='';
+    if(i>0){ const diff=d.total-data[i-1].total; const diffPct=data[i-1].total>0?Math.round(diff/data[i-1].total*100):0; badge=diff>=0?`<span class="up">▲${diffPct}%</span>`:`<span class="down">▼${Math.abs(diffPct)}%</span>`; }
+    rows+=`<div class="trend-row"><span class="trend-year">${d.year}</span><div class="trend-bar-bg"><div class="trend-bar" style="width:${pct}%;"><span>${d.total>0?d.total.toLocaleString()+'명':''}</span></div></div><span class="trend-badge">${badge}</span></div>`;
+  });
+  const first=data[0].total, last=data[data.length-1].total;
+  const totalChange=first>0?Math.round((last-first)/first*100):0;
+  const summary=totalChange>0?`📈 2019년 대비 2022년 한방 환자가 ${totalChange}% 증가했습니다.`:totalChange<0?`📉 2019년 대비 2022년 한방 환자가 ${Math.abs(totalChange)}% 감소했습니다.`:`➡️ 환자 수 변동이 거의 없습니다.`;
+  el.innerHTML=`<p style="font-size:14px;font-weight:500;color:#1a1a1a;margin-bottom:1rem;">${nm} (${code}) · 연도별 한방 환자 추이</p>${rows}
+    <div style="margin-top:1rem;padding:0.875rem;background:#F0F7FF;border-radius:8px;font-size:13px;color:#374151;border:1px solid #BFDBFE;">${summary}</div>
+    <p style="font-size:11px;color:#bbb;margin-top:12px;">* 건강보험 청구 기준</p>`;
+}
 
-    const total = totalM + totalF;
-    const mPct = total > 0 ? Math.round(totalM / total * 100) : 0;
-    const fPct = 100 - mPct;
-
-    let ageRows = '';
-    const maxVal = Math.max(...Object.values(ageMap).map(v => v.m + v.f));
-    Object.entries(ageMap).sort().forEach(([age, v]) => {
-      const sum = v.m + v.f;
-      const pct = maxVal > 0 ? Math.round(sum / maxVal * 100) : 0;
-      ageRows += `
-        <div class="stat-row">
-          <div class="stat-label"><span>${age}</span><span>${sum.toLocaleString()}명</span></div>
-          <div class="stat-bar-bg"><div class="stat-bar" style="width:${pct}%"></div></div>
-        </div>`;
-    });
-
-    statContent.innerHTML = `
-      <p style="font-size:14px; font-weight:500; color:#1a1a1a; margin-bottom:1rem;">${nm} (${code}) · ${year}년 한방 환자 통계</p>
-      <div style="display:flex; gap:12px; margin-bottom:1.25rem;">
-        <div style="flex:1; background:#EEF4FB; border-radius:10px; padding:1rem; text-align:center;">
-          <div style="font-size:12px; color:#93A8C9; margin-bottom:4px;">남성</div>
-          <div style="font-size:22px; font-weight:500; color:#1565C0;">${mPct}%</div>
-          <div style="font-size:12px; color:#555;">${totalM.toLocaleString()}명</div>
-        </div>
-        <div style="flex:1; background:#FEF0F7; border-radius:10px; padding:1rem; text-align:center;">
-          <div style="font-size:12px; color:#93A8C9; margin-bottom:4px;">여성</div>
-          <div style="font-size:22px; font-weight:500; color:#E91E8C;">${fPct}%</div>
-          <div style="font-size:12px; color:#555;">${totalF.toLocaleString()}명</div>
-        </div>
-        <div style="flex:1; background:#F0FFF4; border-radius:10px; padding:1rem; text-align:center;">
-          <div style="font-size:12px; color:#93A8C9; margin-bottom:4px;">전체</div>
-          <div style="font-size:22px; font-weight:500; color:#1B7A3E;">${total.toLocaleString()}</div>
-          <div style="font-size:12px; color:#555;">명</div>
-        </div>
-      </div>
-      <p style="font-size:12px; font-weight:500; color:#555; margin-bottom:10px;">연령별 환자 수</p>
-      ${ageRows}
-      <p style="font-size:11px; color:#bbb; margin-top:12px;">* ${year}년 기준 건강보험 청구 데이터</p>`;
-  } catch(e) {
-    statContent.innerHTML = `<div class="msg msg-danger"><i class="ti ti-wifi-off"></i>통계 로딩 실패</div>`;
-  }
+async function loadRegion(code, nm, apiKey, el) {
+  const xml = await fetchXml(`https://apis.data.go.kr/B551182/diseaseInfoService1/getDissByAreaStats1?year=2022&sickCd=${code}&sickType=1&medTp=2&numOfRows=50&pageNo=1&ServiceKey=${encodeURIComponent(apiKey)}`);
+  const items = xml.querySelectorAll('item');
+  if (items.length===0) { el.innerHTML='<div class="msg-empty"><i class="ti ti-map-off"></i>지역 데이터 없음</div>'; return; }
+  const regions=[];
+  items.forEach(item=>{
+    const area=item.querySelector('sidoNm')?.textContent||item.querySelector('area')?.textContent||'-';
+    const cnt=parseInt(item.querySelector('ptntCnt')?.textContent||'0');
+    if(cnt>0) regions.push({area,cnt});
+  });
+  regions.sort((a,b)=>b.cnt-a.cnt);
+  const maxVal=regions[0]?.cnt||1;
+  let rows='';
+  regions.forEach((r,i)=>{
+    const pct=Math.round(r.cnt/maxVal*100);
+    const medal=i===0?'🥇':i===1?'🥈':i===2?'🥉':'';
+    rows+=`<div class="region-row"><span class="region-name">${medal}${r.area}</span><div class="stat-bar-bg" style="flex:1;"><div class="stat-bar" style="width:${pct}%;background:#1565C0;"></div></div><span style="font-size:12px;color:#555;width:70px;text-align:right;">${r.cnt.toLocaleString()}명</span></div>`;
+  });
+  el.innerHTML=`<p style="font-size:14px;font-weight:500;color:#1a1a1a;margin-bottom:1rem;">${nm} (${code}) · 2022년 지역별 한방 환자</p>${rows}
+    <p style="font-size:11px;color:#bbb;margin-top:12px;">* 2022년 건강보험 청구 기준</p>`;
 }
 </script>
 </body>
