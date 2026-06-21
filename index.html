@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HIRA 한방 질병 조회</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.0.0/dist/tabler-icons.min.css">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #f5f5f0;
+      min-height: 100vh;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 2rem 1rem;
+    }
+    .container {
+      background: #fff;
+      border-radius: 16px;
+      padding: 2rem;
+      width: 100%;
+      max-width: 680px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    }
+    .header { display: flex; align-items: center; gap: 10px; margin-bottom: 1.5rem; }
+    .header i { font-size: 24px; color: #888; }
+    .header h1 { font-size: 20px; font-weight: 500; color: #1a1a1a; }
+    .header p { font-size: 13px; color: #888; margin-top: 2px; }
+
+    .card {
+      background: #f8f8f6;
+      border-radius: 12px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.25rem;
+      border: 0.5px solid #e0e0da;
+    }
+    label { font-size: 13px; color: #666; display: block; margin-bottom: 6px; }
+    input[type="password"], input[type="text"] {
+      width: 100%;
+      padding: 8px 12px;
+      font-size: 14px;
+      border: 0.5px solid #d0d0ca;
+      border-radius: 8px;
+      background: #fff;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+    input:focus { border-color: #666; }
+    .hint { font-size: 12px; color: #aaa; margin-top: 6px; }
+
+    .search-row { display: flex; gap: 8px; margin-bottom: 1.5rem; }
+    .search-row > div:first-child { flex: 1; }
+    .search-row label { font-size: 13px; color: #666; display: block; margin-bottom: 6px; }
+    button {
+      height: 38px;
+      padding: 0 1.25rem;
+      font-size: 14px;
+      border: 0.5px solid #ccc;
+      border-radius: 8px;
+      background: #fff;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.15s;
+      margin-top: 25px;
+    }
+    button:hover { background: #f0f0ec; }
+    button:active { transform: scale(0.98); }
+
+    .result-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+    .result-header span { font-size: 13px; color: #888; }
+    .badge {
+      font-size: 12px;
+      background: #e8f0fb;
+      color: #1a5cb0;
+      padding: 3px 10px;
+      border-radius: 8px;
+    }
+    .table-wrap {
+      border: 0.5px solid #e0e0da;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+    thead tr { background: #f8f8f6; }
+    th {
+      padding: 10px 12px;
+      text-align: left;
+      font-size: 12px;
+      font-weight: 500;
+      color: #888;
+    }
+    td {
+      padding: 10px 12px;
+      font-size: 13px;
+      color: #1a1a1a;
+      border-bottom: 0.5px solid #eee;
+    }
+    tr:last-child td { border-bottom: none; }
+    .code-cell { font-weight: 500; white-space: nowrap; width: 90px; }
+    .eng-cell { color: #888; }
+
+    .msg {
+      padding: 1rem;
+      border-radius: 10px;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .msg-danger { background: #fef0f0; color: #c0392b; }
+    .msg-warning { background: #fffbec; color: #b07d10; }
+    .msg-empty {
+      padding: 2rem;
+      text-align: center;
+      color: #aaa;
+      font-size: 14px;
+      border: 0.5px solid #eee;
+      border-radius: 12px;
+    }
+    .msg-empty i { font-size: 28px; display: block; margin-bottom: 8px; }
+    .msg-empty small { font-size: 12px; display: block; margin-top: 4px; }
+
+    footer {
+      margin-top: 2rem;
+      text-align: center;
+      font-size: 12px;
+      color: #bbb;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <div class="header">
+    <i class="ti ti-stethoscope"></i>
+    <div>
+      <h1>HIRA 한방 질병 조회</h1>
+      <p>건강보험심사평가원 질병정보서비스</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <label><i class="ti ti-key" style="font-size:14px; vertical-align:-2px; margin-right:4px;"></i>공공데이터포털 인증키</label>
+    <input type="password" id="apiKey" placeholder="발급받은 일반 인증키를 입력하세요" />
+    <p class="hint">www.data.go.kr → 마이페이지 → 개발계정 → 일반 인증키</p>
+  </div>
+
+  <div class="search-row">
+    <div>
+      <label><i class="ti ti-search" style="font-size:14px; vertical-align:-2px; margin-right:4px;"></i>질병명 검색</label>
+      <input type="text" id="searchText" placeholder="예: 중풍, 소화불량, 두통" />
+    </div>
+    <button onclick="search()">
+      <i class="ti ti-search" style="font-size:14px; margin-right:4px;"></i>조회
+    </button>
+  </div>
+
+  <div id="resultArea"></div>
+
+  <footer>건강보험심사평가원 질병정보서비스 | 한방(medTp=2) 기준 조회</footer>
+</div>
+
+<script>
+document.getElementById('searchText').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') search();
+});
+
+async function search() {
+  const apiKey = document.getElementById('apiKey').value.trim();
+  const searchText = document.getElementById('searchText').value.trim();
+  const resultArea = document.getElementById('resultArea');
+
+  if (!apiKey) {
+    resultArea.innerHTML = '<div class="msg msg-danger"><i class="ti ti-alert-circle"></i>인증키를 입력해주세요.</div>';
+    return;
+  }
+  if (!searchText) {
+    resultArea.innerHTML = '<div class="msg msg-warning"><i class="ti ti-alert-triangle"></i>검색어를 입력해주세요.</div>';
+    return;
+  }
+
+  resultArea.innerHTML = '<div class="msg" style="color:#888;"><i class="ti ti-loader"></i>조회 중...</div>';
+
+  const url = `https://apis.data.go.kr/B551182/diseaseInfoService1/getDissNameCodeList1?sickType=1&medTp=2&diseaseType=SICK_NM&searchText=${encodeURIComponent(searchText)}&numOfRows=20&pageNo=1&ServiceKey=${encodeURIComponent(apiKey)}`;
+
+  try {
+    const res = await fetch(url);
+    const text = await res.text();
+    const parser = new DOMParser();
+    const xml = parser.parseFromString(text, 'text/xml');
+
+    const resultCode = xml.querySelector('resultCode')?.textContent;
+    if (resultCode !== '00') {
+      const msg = xml.querySelector('resultMsg')?.textContent || '알 수 없는 오류';
+      resultArea.innerHTML = `<div class="msg msg-danger"><i class="ti ti-x"></i>오류: ${msg}</div>`;
+      return;
+    }
+
+    const items = xml.querySelectorAll('item');
+    const totalCount = xml.querySelector('totalCount')?.textContent || '0';
+
+    if (items.length === 0) {
+      resultArea.innerHTML = `<div class="msg-empty"><i class="ti ti-database-off"></i>검색 결과가 없습니다.<small>한방 상병명은 다른 키워드로 검색해보세요.</small></div>`;
+      return;
+    }
+
+    let rows = '';
+    items.forEach(item => {
+      const code = item.querySelector('sickCd')?.textContent || '-';
+      const nm = item.querySelector('sickNm')?.textContent || '-';
+      const engNm = item.querySelector('sickEngNm')?.textContent || '-';
+      rows += `<tr>
+        <td class="code-cell">${code}</td>
+        <td>${nm}</td>
+        <td class="eng-cell">${engNm}</td>
+      </tr>`;
+    });
+
+    resultArea.innerHTML = `
+      <div class="result-header">
+        <span>검색 결과</span>
+        <span class="badge">총 ${totalCount}건</span>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:90px;">상병코드</th>
+              <th>한글 상병명</th>
+              <th>영문 상병명</th>
+            </tr>
+          </thead>
+          <tbody>${rows}</tbody>
+        </table>
+      </div>`;
+  } catch (e) {
+    resultArea.innerHTML = `<div class="msg msg-danger"><i class="ti ti-wifi-off"></i>네트워크 오류. 인증키를 확인해주세요.</div>`;
+  }
+}
+</script>
+</body>
+</html>
